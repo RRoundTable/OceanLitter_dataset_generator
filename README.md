@@ -43,18 +43,18 @@ loss function
 
 - [googleimagesdownload](https://github.com/hardikvasa/google-images-download)을 이용하였습니다.
 
-- trainA: plastic bag
+- trainA 예시: plastic bag
 
-[plastic bag](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_2jxoi2vKJ6yHUmLTSVDnwo1-rvvSB10N50YNI8JgSx8ehgm2)
+![plastic bag](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_2jxoi2vKJ6yHUmLTSVDnwo1-rvvSB10N50YNI8JgSx8ehgm2)
 
-- trainB : ocean litter의 plastic bag 
+- trainB 예시 : ocean litter의 plastic bag 
 
-[litter bag](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXqPu_NbWOLUQfc6jrEx2xARSXJrn293x8T2hqw_BJ9wMwmPfc)
+![litter bag](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXqPu_NbWOLUQfc6jrEx2xARSXJrn293x8T2hqw_BJ9wMwmPfc)
 
 
 ## result
 
-![sample image]()
+![sample image](./sample_e400_b3/B_249_0009.jpg)
 
 
 
