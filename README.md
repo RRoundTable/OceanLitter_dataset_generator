@@ -22,17 +22,19 @@
 
 ![CycleGAN](http://www.kecl.ntt.co.jp/people/kaneko.takuhiro/projects/cyclegan-vc/images/training_procedure.png)
 
-- A set과 B set 사이의 특징을 학습시켜, A를 B처럼 바꿀 수 있습니다.
-  배경 혹은 스타일 등등을 바꿀 수 있습니다.
-  
-- paired data가 필요없는 것이 큰 특징입니다.
+  - A set과 B set 사이의 특징을 학습시켜, A를 B처럼 바꿀 수 있습니다.
+    배경 혹은 스타일 등등을 바꿀 수 있습니다.
+
+  - paired data가 필요없는 것이 큰 특징입니다.
 
 ![CycleGAN](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsZKBaOB1ivYwK7vi_GpllECgvPOC2WFbf-0rxKn6-IA4TB0pn)
 
-- 위의 사진과 같이, 말을 얼룩말처럼 바꿀 수도 있습니다.
-- 또한 사진의 계절을 여름에서 겨울로 바꾸는 것도 가능합니다.
+  - 위의 사진과 같이, 말을 얼룩말처럼 바꿀 수도 있습니다.
+  - 또한 사진의 계절을 여름에서 겨울로 바꾸는 것도 가능합니다.
 
 - loss function
+
+![loss](https://t1.daumcdn.net/cfile/tistory/99463F33599681290E)
 
 ## dataset
 
