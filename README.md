@@ -14,11 +14,11 @@
 
 ## model
 
-논문
+### 논문
 
 - [Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/pdf/1703.10593.pdf)
 
-모델구조
+### 모델구조
 
 ![CycleGAN](http://www.kecl.ntt.co.jp/people/kaneko.takuhiro/projects/cyclegan-vc/images/training_procedure.png)
 
@@ -33,7 +33,7 @@
 - 또한 사진의 계절을 여름에서 겨울로 바꾸는 것도 가능합니다.
 
 
-loss function
+### loss function
 
 ![loss](https://t1.daumcdn.net/cfile/tistory/99463F33599681290E)
 
