@@ -54,6 +54,8 @@ loss function
 
 ## result
 
+plastic bag을 Ocean_litter(해양쓰레기)로 style transfer한 예시입니다.
+
 ![sample image](./sample_e400_b3/B_249_0009.jpg)
 
 
