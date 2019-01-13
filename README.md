@@ -41,15 +41,15 @@ loss function
 
 ## dataset
 
-- ![googleimagesdownload](https://github.com/hardikvasa/google-images-download)을 이용하였습니다.
+- [googleimagesdownload](https://github.com/hardikvasa/google-images-download)을 이용하였습니다.
 
 - trainA: plastic bag
 
-[plastic bag]()
+[plastic bag](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_2jxoi2vKJ6yHUmLTSVDnwo1-rvvSB10N50YNI8JgSx8ehgm2)
 
 - trainB : ocean litter의 plastic bag 
 
-[litter bag]()
+[litter bag](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXqPu_NbWOLUQfc6jrEx2xARSXJrn293x8T2hqw_BJ9wMwmPfc)
 
 
 ## result
