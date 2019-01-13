@@ -32,7 +32,8 @@
 - 위의 사진과 같이, 말을 얼룩말처럼 바꿀 수도 있습니다.
 - 또한 사진의 계절을 여름에서 겨울로 바꾸는 것도 가능합니다.
 
-- loss function
+
+loss function
 
 ![loss](https://t1.daumcdn.net/cfile/tistory/99463F33599681290E)
 
