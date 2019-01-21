@@ -10,7 +10,7 @@
 하지만, 해양쓰레기에 대한 이미지 데이터셋은 많이 부족한 상황입니다. 
 이러한 상황을 개선하기 위해서 CycleGAN을 이용하여 데이터 셋을 생성하는 프로젝트입니다.
 
-- 특히, 이번 프로젝트에서 기존의 구현되어 있지 않은 densenet을 network상에 구현하여 각 generator간의 성능을 비교할 수 있습니다.
+- 특히, 이번 프로젝트에서 기존의 구현되어 있지 않은 [densenet](https://arxiv.org/abs/1608.06993)을 network상에 구현하여 각 generator간의 성능을 비교할 수 있습니다.
 - 또한, 부족한 데이터셋을 보완하기 위해서 preprocessing과정을 추가하기도 하였습니다.
 
 ## model
@@ -67,7 +67,7 @@
 ![original](./result/original.jpg)
 
 
-전처리된 이미지
+전처리된 이미지 : 
 
 ![preprocess](./result/preprocessed.jpg)
 
@@ -85,5 +85,5 @@ plastic bag을 Ocean_litter(해양쓰레기)로 style transfer한 예시입니�
 - https://arxiv.org/pdf/1703.10593.pdf
 - https://github.com/xhujoy/CycleGAN-tensorflow
 - https://github.com/junyanz/CycleGAN
-
+- https://arxiv.org/abs/1608.06993
 
