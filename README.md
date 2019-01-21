@@ -66,7 +66,7 @@
 ![original](./result/original.jpg)
 
 전처리된 이미지
-![preprocess](./result/preprocess.jpg)
+![preprocess](./result/preprocessed.jpg)
 
 ## result
 
