@@ -63,10 +63,10 @@
 - 예시
 
 원본이미지
-[original]()
+![original](./result/original.jpg)
 
 전처리된 이미지
-[preprocess]()
+![preprocess](./result/preprocess.jpg)
 
 ## result
 
