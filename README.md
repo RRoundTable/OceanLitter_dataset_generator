@@ -8,9 +8,10 @@
 그 중, 해양쓰레기를 검출하는 이슈는 'object detection'기술로 충분히 개선할 수 있는 상황입니다.
 
 하지만, 해양쓰레기에 대한 이미지 데이터셋은 많이 부족한 상황입니다. 
-
 이러한 상황을 개선하기 위해서 CycleGAN을 이용하여 데이터 셋을 생성하는 프로젝트입니다.
 
+- 특히, 이번 프로젝트에서 기존의 구현되어 있지 않은 densenet을 network상에 구현하여 각 generator간의 성능을 비교할 수 있습니다.
+- 또한, 부족한 데이터셋을 보완하기 위해서 preprocessing과정을 추가하기도 하였습니다.
 
 ## model
 
@@ -51,6 +52,21 @@
 
 ![litter bag](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXqPu_NbWOLUQfc6jrEx2xARSXJrn293x8T2hqw_BJ9wMwmPfc)
 
+## preprocessing
+
+- pixel단위의 clustering
+
+- opencv의 kmeans를 이용
+
+- 유사한 feature를 가진 pixel에 동일한 값을 부여
+
+- 예시
+
+원본이미지
+[original]()
+
+전처리된 이미지
+[preprocess]()
 
 ## result
 
