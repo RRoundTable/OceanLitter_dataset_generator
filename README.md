@@ -64,11 +64,12 @@
 
 원본이미지
 
-![original](./result/original.jpg){:height="24px" width="48px"}
+![original](./result/original.jpg)
+
 
 전처리된 이미지
 
-![preprocess](./result/preprocessed.jpg){:height="24px" width="48px"}
+![preprocess](./result/preprocessed.jpg)
 
 ## result
 
