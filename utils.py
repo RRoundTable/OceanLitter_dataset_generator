@@ -7,6 +7,7 @@ import pprint
 import scipy.misc
 import numpy as np
 import copy
+import os
 try:
     _imread = scipy.misc.imread
 except AttributeError:
@@ -79,6 +80,11 @@ def get_image(image_path, image_size, is_crop=True, resize_w=64, is_grayscale = 
     return transform(imread(image_path, is_grayscale), image_size, is_crop, resize_w)
 
 def save_images(images, size, image_path):
+    path=image_path.split("/")[:-1]
+    print(path)
+    path="./"+path[1]
+    if not os.path.exists(path):
+        os.mkdir(path)
     return imsave(inverse_transform(images), size, image_path)
 
 def imread(path, is_grayscale = False):

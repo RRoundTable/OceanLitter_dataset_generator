@@ -132,7 +132,103 @@ def generator_resnet(image, options, reuse=False, name="generator"):
         d2 = tf.nn.relu(instance_norm(d2, 'g_d2_bn'))
         d2 = tf.pad(d2, [[0, 0], [3, 3], [3, 3], [0, 0]], "REFLECT")
         pred = tf.nn.tanh(conv2d(d2, options.output_c_dim, 7, 1, padding='VALID', name='g_pred_c'))
+        print("input : ", image) # input :  Tensor("strided_slice:0", shape=(?, 256, 256, 3), dtype=float32)
+        print("pred : ",pred) # Tensor("generatorA2B/Tanh:0", shape=(?, 256, 256, 3), dtype=float32)
+        return pred
 
+
+# densenet을 이용한 generator 추가
+def generator_densenet(image, options, reuse=False, name="generator"):
+    dropout_rate= 0.7 if options.is_training else 1.0
+    with tf.variable_scope(name):
+        # image is 256 x 256 x input_c_dim
+        if reuse:
+            tf.get_variable_scope().reuse_variables()
+        else:
+            assert tf.get_variable_scope().reuse is False
+        training= not reuse
+        print(training)
+        def bottle_neck(inputs, layer_name):
+            """
+            the BN-ReLU-Conv(1×1)-BN-ReLU-Conv(3×3)
+            """
+            with tf.name_scope(layer_name+"_bottle_neck"):
+                H=batch_norm(inputs, name=layer_name+"b1")
+                H =lrelu(H)
+                H =conv2d(H, options.gf_dim*4, ks=1,s=1, name=layer_name + "conv1")
+                H = tf.nn.dropout(H, dropout_rate)
+
+                H = batch_norm(H, name=layer_name+"b2")
+                H = lrelu(H)
+                H = conv2d(H, options.gf_dim, ks=3,s=1,
+                               name=layer_name + "conv2")  # reduce the number of feature-maps (차원이 아니라 크기를 의미한다)
+                H = tf.nn.dropout(H, dropout_rate)
+
+                return H
+
+        def dense_block(inputs,nb_layer,layer_name):
+            """
+             x` = H`([x0, x1, . . . , x`−1])
+            """
+            with tf.name_scope(layer_name):
+                layer_concat = []  # input의 변화 : 점진적으로 증가한다
+
+                x = bottle_neck(inputs=inputs, layer_name=layer_name + "bottleN" + str(0))
+                layer_concat.append(x)
+
+                for i in range(nb_layer - 1):
+
+                    x = Concatenation(layer_concat)
+                    x = bottle_neck(x, layer_name=layer_name + "bottleN" + str(i + 1))
+                    layer_concat.append(x)
+
+            x = Concatenation(layer_concat)
+
+            return x
+
+        def transition_layer(x,scope):
+            """
+            1*1 conv
+            2*2 average pool, stride 2
+
+            :return: transition layer
+            """
+            with tf.name_scope(scope):
+
+                x=batch_norm(x, name=scope+"b")
+                x=lrelu(x)
+                x=conv2d(x,options.gf_dim,ks=1,s=1,name=scope+"conv1")
+                x=tf.nn.dropout(x,dropout_rate)
+                # x=Avergae_pooling(x,pool_size=[2,2],stride=2)
+                # print("x2 : ", x)
+            return x
+
+        nb_block=4
+        x=tf.pad(image, [[0, 0], [3, 3], [3, 3], [0, 0]], "REFLECT")
+        print("x satrt : ", x)
+        x=conv2d(x,options.gf_dim*2,ks=7,s=2,name="g_d01")
+        x = Max_pooling(x, pool_size=[3, 3], stride=2)
+        print("x conv : ", x)
+
+
+        for i in range(nb_block):
+            x = dense_block(x, nb_layer=4, layer_name="dense_" + str(i))
+            x = transition_layer(x, scope="trans_" + str(i))
+
+        x = dense_block(x, nb_layer=32, layer_name="dense_final")
+
+        # 100 layer
+        x = batch_norm(x, name="linear_batch")
+        x = Relu(x)
+        #x = Gloval_Average_Pooing(x)
+        print("input : ", image) #  Tensor("strided_slice:0", shape=(?, 256, 256, 3), dtype=float32) /
+        print("x last : ",x)
+        x=deconv2d(x,options.gf_dim,3,2, name="dconv") # 두배의 차원을 곱한다
+        x=lrelu(x)
+        x = deconv2d(x, options.gf_dim, 3, 2, name="dconv2")
+        print("x last2 : ", x)
+        pred=tf.nn.tanh(conv2d(x,options.output_c_dim,ks=5,s=1,padding="VALID", name="g_pred_c")) # image 차원이 그대로 유지가 되어야 한다
+        print("pred : ", pred)
         return pred
 
 

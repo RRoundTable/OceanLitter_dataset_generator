@@ -23,8 +23,14 @@ class cyclegan(object):
         self.discriminator = discriminator
         if args.use_resnet:
             self.generator = generator_resnet
+            self.generator_name="generator_resnet"
+            print(self.generator_name)
         else:
-            self.generator = generator_unet
+            self.generator = generator_densenet
+            self.generator_name = "generator_densenet"
+            print(self.generator_name)
+
+
         if args.use_lsgan:
             self.criterionGAN = mae_criterion
         else:
@@ -139,8 +145,8 @@ class cyclegan(object):
                 print(" [!] Load failed...")
 
         for epoch in range(args.epoch):
-            dataA = glob('./datasets/{}/*.*'.format(self.dataset_dir + '/trainA'))
-            dataB = glob('./datasets/{}/*.*'.format(self.dataset_dir + '/trainB'))
+            dataA = glob('./datasets/{}/*.*'.format(self.dataset_dir + '/trainA_pre'))
+            dataB = glob('./datasets/{}/*.*'.format(self.dataset_dir + '/trainB_pre'))
 
             np.random.shuffle(dataA)
             np.random.shuffle(dataB)
@@ -173,7 +179,6 @@ class cyclegan(object):
                                self.fake_B_sample: fake_B,
                                self.lr: lr})
                 self.writer.add_summary(summary_str, counter)
-
                 counter += 1
                 print(("Epoch: [%2d] [%4d/%4d] time: %4.4f" % (
                     epoch, idx, batch_idxs, time.time() - start_time)))
@@ -193,7 +198,7 @@ class cyclegan(object):
             os.makedirs(checkpoint_dir)
 
         self.saver.save(self.sess,
-                        os.path.join(checkpoint_dir, model_name),
+                        os.path.join(checkpoint_dir, model_name,self.generator_name),
                         global_step=step)
 
     def load(self, checkpoint_dir):
@@ -211,8 +216,8 @@ class cyclegan(object):
             return False
 
     def sample_model(self, sample_dir, epoch, idx):
-        dataA = glob('./datasets/{}/*.*'.format(self.dataset_dir + '/testA'))
-        dataB = glob('./datasets/{}/*.*'.format(self.dataset_dir + '/testB'))
+        dataA = glob('./datasets/{}/*.*'.format(self.dataset_dir + '/testA_pre'))
+        dataB = glob('./datasets/{}/*.*'.format(self.dataset_dir + '/testB_pre'))
         np.random.shuffle(dataA)
         np.random.shuffle(dataB)
         batch_files = list(zip(dataA[:self.batch_size], dataB[:self.batch_size]))
@@ -224,9 +229,9 @@ class cyclegan(object):
             feed_dict={self.real_data: sample_images}
         )
         save_images(fake_A, [self.batch_size, 1],
-                    './{}/A_{:02d}_{:04d}.jpg'.format(sample_dir, epoch, idx))
+                    './{}/A_{:02d}_{:04d}.jpg'.format(sample_dir+"_"+self.generator_name, epoch, idx))
         save_images(fake_B, [self.batch_size, 1],
-                    './{}/B_{:02d}_{:04d}.jpg'.format(sample_dir, epoch, idx))
+                    './{}/B_{:02d}_{:04d}.jpg'.format(sample_dir+"_"+self.generator_name, epoch, idx))
 
     def test(self, args):
         """Test cyclegan"""
