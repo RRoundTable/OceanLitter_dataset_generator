@@ -63,10 +63,12 @@
 - 예시
 
 원본이미지
-![original](./result/original.jpg)
+
+![original](./result/original.jpg=250x250)
 
 전처리된 이미지
-![preprocess](./result/preprocessed.jpg)
+
+![preprocess](./result/preprocessed.jpg=250x250)
 
 ## result
 
